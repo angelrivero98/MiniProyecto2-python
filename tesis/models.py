@@ -2,12 +2,25 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
+class Rol(models.Model):
+    nombre = models.CharField(max_length=255, blank=False, null=False)
+
+    class Meta:
+        db_table = 'rol'
+
+    def __str__(self):
+        return self.nombre
+
+
 class Usuario(AbstractUser):
-    rol = models.CharField(max_length=255, blank=False, null=False)
+    rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
     REQUIRED_FIELDS = ['rol', 'email']
 
     class Meta:
         db_table = 'usuario'
+
+    def __str__(self):
+        return self.username
 
 
 class Persona(models.Model):
