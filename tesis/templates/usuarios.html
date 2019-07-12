@@ -59,9 +59,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <select name="" id="" class="form-control">
-                        <option value="0">Administrador</option>
-                        <option value="1">Gerente</option>
-                        <option value="2">Usuario</option>
+                        {% for rol in roles %}
+                        <option value="{{ rol.id }}">{{ rol.nombre }}</option>
+                        {% endfor %}
                       </select>
                     </div>
                   </div>
