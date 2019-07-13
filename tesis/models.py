@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 
@@ -53,15 +54,13 @@ class Evaluador(Persona):
         db_table = 'evaluador'
 
 
-class Autor(Persona):
-    class Meta:
-        db_table = 'autor'
-
-
 class Tesis(models.Model):
-    nombre = models.CharField(max_length=255)
-    fecha_inicio = models.DateField()
-    fecha_fin = models.DateField()
+    nombre = models.CharField(max_length=255, null=False, blank=False)
+    fecha = models.DateField(default=timezone.now, null=False, blank=False)
+    resumen = models.TextField(null=False, blank=False)
+    calificacion = models.DecimalField(
+        default=0.0, null=False, blank=False, max_digits=4, decimal_places=2)
+    finalizada = models.BooleanField(default=False, null=False, blank=False)
     escuela = models.ForeignKey(Escuela, on_delete=models.CASCADE)
     palabasclave = models.ManyToManyField(
         PalabraClave)
@@ -71,7 +70,14 @@ class Tesis(models.Model):
         Evaluador, on_delete=models.CASCADE, related_name='tutor')
 
     class Meta:
-        db_table = 'tg'
+        db_table = 'tesis'
+
+
+class Autor(Persona):
+    tesis = models.ForeignKey(Tesis, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'autor'
 
 
 class Audit(models.Model):
