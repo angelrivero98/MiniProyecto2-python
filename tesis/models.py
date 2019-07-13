@@ -31,6 +31,9 @@ class Persona(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return self.nombre + ' ' + self.apellido
+
 
 class Escuela(models.Model):
     nombre = models.CharField(max_length=255)
@@ -38,12 +41,18 @@ class Escuela(models.Model):
     class Meta:
         db_table = 'escuela'
 
+    def __str__(self):
+        return self.nombre
+
 
 class PalabraClave(models.Model):
     nombre = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'palabraclave'
+
+    def __str__(self):
+        return self.nombre
 
 
 class Evaluador(Persona):
@@ -71,6 +80,9 @@ class Tesis(models.Model):
 
     class Meta:
         db_table = 'tesis'
+
+    def __str__(self):
+        return self.nombre
 
 
 class Autor(Persona):
