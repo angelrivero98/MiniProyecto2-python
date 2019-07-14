@@ -1,5 +1,5 @@
 from django import forms
-from tesis.models import Usuario, Autor
+from tesis.models import Usuario, Autor, Tesis
 
 
 class UsuarioForm(forms.ModelForm):
@@ -17,10 +17,10 @@ class UsuarioForm(forms.ModelForm):
 class AutorForm(forms.ModelForm):
     class Meta:
         model = Autor
-        fields = '__all__'
+        fields = ('nombre','apellido',)
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
-            'apellido': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'}),
+            'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'}),
         }
 
 
@@ -30,3 +30,14 @@ class FormInicio(forms.Form):
         widget=forms.TextInput(
             attrs={'class': 'form-control', 'placeholder': 'Buscar tesis'})
     )
+
+class TesisForm(forms.Form):
+    class Meta:
+        model = Tesis
+        fields = '__all__'
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo electrónico'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
+            'rol': forms.Select(attrs={'class': 'form-control'})
+        }

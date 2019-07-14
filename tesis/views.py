@@ -45,33 +45,29 @@ class UsersView(View):
                 'Error creando el usuario. El formulario no es válido' + str(request.POST))
             return render(request, 'usuarios.html', {'form': form})
                   
+class TesisView(View):
 
-def tesis(request):
-    if request.method == "GET":
+    
+    def get(self, request, *args, **kargs):
         tesis = Tesis.objects.all()
         autores = Autor.objects.all()
         return render(request, "tesis.html", {'tesis': tesis, 'autores': autores})
-    elif request.method == "POST":
+
+    def post(self, request, *args, **kargs):
+        tesis = Tesis.objects.all()
+        autores = Autor.objects.all()
+        return render(request, "tesis.html", {'tesis': tesis, 'autores': autores})     
+
+def postAutor(request):
+    if request.method == "POST":
         formAutor = AutorForm(request.POST)
         if formAutor.is_valid():
             try:
                 formAutor.save()
-                return redirect('/tesis')
+                return redirect('tesis')
             except:
                 pass
-        else:
-            formAutor = AutorForm()
-            return render(request, 'tesis.html', {'formAutor': formAutor})    
+    formAutor = AutorForm()
+    return render(request, 'createAutor.html', {'formAutor': formAutor})        
 
-# def create_autor(request):
-#     if request.method == "POST":
-#         form = AutorForm(request.POST)
-#         if form.is_valid():
-#             try:
-#                 form.save()
-#                 return redirect('/tesis')
-#             except:
-#                 pass
-#         else:
-#             form = AutorForm()
-#             return render(request, 'tesis.html', {'form': form})
+

@@ -86,7 +86,7 @@ class Tesis(models.Model):
 
 
 class Autor(Persona):
-    tesis = models.ForeignKey(Tesis, on_delete=models.CASCADE)
+    tesis = models.ForeignKey(Tesis, on_delete=models.CASCADE, blank=True)
 
     class Meta:
         db_table = 'autor'

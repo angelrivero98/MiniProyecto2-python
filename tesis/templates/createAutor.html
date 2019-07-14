@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %}
+{% block content %}
+<div class="container-fluid" id="exampleAutor" tabindex="-1" role="dialog" aria-labelledby="exampleAutorLabel"
+aria-hidden="true">
+    <div class="modal-header">
+      <h5 class="modal-title">Crear autor</h5>
+    </div>
+    <div class="modal-body">
+      <form action="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              {{formAutor.nombre}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              {{formAutor.apellido}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          {% for field, errors in formAutor.errors.items %}
+          {% for error in errors %}
+          {{ field }} {{ error }}
+          {% endfor %}
+          {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <a href="{% url 'tesis' %}"><button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+          </button></a>
+          <button type="button" class="btn btn-primary">Crear autor</button>
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock %}
