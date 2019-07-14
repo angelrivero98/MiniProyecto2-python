@@ -66,6 +66,7 @@
         <th>Nombre de usuario</th>
         <th>Email</th>
         <th>Cargo</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -74,6 +75,13 @@
         <td>{{ usuario.username }}</td>
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.rol }}</td>
+        <td>
+          <a href="{% url 'users' %}{{ usuario.id }}">Editar</a>
+          <form action="{% url 'users' %}{{ usuario.id }}/delete" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Eliminar"/>
+          </form>
+        </td>
       </tr>
       {% endfor %}
     </tbody>

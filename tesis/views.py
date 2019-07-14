@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from tesis.models import Usuario, Tesis, Autor, Evaluador
 from tesis.forms import UsuarioForm, FormInicio, AutorForm
@@ -21,9 +21,15 @@ def home(request):
 class UsersView(View):
 
     def get(self, request, *args, **kargs):
+        # usuario = kargs.get('id', None)
+        # if usuario == None:
         usuarios = Usuario.objects.all()
         form = UsuarioForm()
         return render(request, "usuarios.html", {'usuarios': usuarios, 'form': form})
+        # else:
+        #     usuario = Usuario.objects.filter(pk=usuario)
+        #     form = UsuarioForm(usuario)
+        #     return HttpResponse
 
     def post(self, request, *args, **kargs):
         logging.info('Creando usuario')
@@ -44,7 +50,23 @@ class UsersView(View):
             logging.error(
                 'Error creando el usuario. El formulario no es válido' + str(request.POST))
             return render(request, 'usuarios.html', {'form': form})
-                  
+
+    def put(self, request, *args, **kargs):
+        form = UsuarioForm(request.PUT)
+        print(kargs['id'])
+        # if form.is_valid():
+        #     user = Usuario.objects.filter(pk=kargs['id'])
+        #     logging.info('El usuario se ha actualizado')
+
+
+def delete_user(request, user_id):
+    logging.info('Eliminando al usuario')
+    user = Usuario.objects.filter(pk=user_id)
+    user.delete()
+    usuarios = Usuario.objects.all()
+    form = UsuarioForm()
+    return redirect('users')
+
 
 def tesis(request):
     if request.method == "GET":
