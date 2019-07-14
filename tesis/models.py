@@ -71,7 +71,7 @@ class Tesis(models.Model):
         default=0.0, null=False, blank=False, max_digits=4, decimal_places=2)
     finalizada = models.BooleanField(default=False, null=False, blank=False)
     escuela = models.ForeignKey(Escuela, on_delete=models.CASCADE)
-    palabasclave = models.ManyToManyField(
+    palabrasclave = models.ManyToManyField(
         PalabraClave)
     evaluadores = models.ManyToManyField(
         Evaluador, related_name='evaluadores')

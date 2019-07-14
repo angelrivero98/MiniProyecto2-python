@@ -20,3 +20,11 @@ class AutorForm(forms.ModelForm):
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
             'apellido': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'}),
         }
+
+class FormInicio(forms.Form):
+    search = forms.CharField(
+        max_length=255,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'Buscar tesis'})
+    )
+
