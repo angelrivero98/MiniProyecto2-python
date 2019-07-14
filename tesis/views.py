@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from tesis.models import Usuario, Rol, Tesis, Autor, Evaluador
+from tesis.models import Usuario, Tesis, Autor, Evaluador
 from tesis.forms import UsuarioForm, FormInicio, AutorForm
 from tesis.filters import SearchFilter
+import logging
+import datetime
 # Create your views here.
 
 
@@ -13,27 +15,33 @@ def home(request):
     else:
         form = FormInicio()
         return render(request, 'home.html', {'form': form})
-        # filter = SearchFilter(request.GET, queryset=Tesis.objects.all())
-        # return render(request, 'home.html', {'filter': filter})
 
 
 def users(request):
     if request.method == "GET":
         usuarios = Usuario.objects.all()
-        roles = Rol.objects.all()
         form = UsuarioForm()
-        return render(request, "usuarios.html", {'usuarios': usuarios, 'form': form, 'roles': roles})
+        return render(request, "usuarios.html", {'usuarios': usuarios, 'form': form})
     elif request.method == "POST":
-        form = UsuarioForm(request.POST)
+        logging.info('Creando usuario')
+        data = request.POST.copy()
+        data['date_joined'] = datetime.datetime.now()
+        form = UsuarioForm(data)
         if form.is_valid():
             try:
+                logging.info('El usuario fue creado')
                 form.save()
-                return redirect('/users')
+                usuarios = Usuario.objects.all()
+                form = UsuarioForm()
+                return render(request, "usuarios.html", {'usuarios': usuarios, 'form': form})
             except:
+                logging.error('Error guardando el usuario.')
                 pass
         else:
-            form = UsuarioForm()
+            logging.error(
+                'Error creando el usuario. El formulario no es válido' + str(request.POST))
             return render(request, 'usuarios.html', {'form': form})
+
 
 def tesis(request):
     if request.method == "GET":
@@ -50,7 +58,7 @@ def tesis(request):
                 pass
         else:
             form = AutorForm()
-            return render(request, 'tesis.html', {'form': form})    
+            return render(request, 'tesis.html', {'form': form})
 
 # def create_autor(request):
 #     if request.method == "POST":
@@ -63,4 +71,4 @@ def tesis(request):
 #                 pass
 #         else:
 #             form = AutorForm()
-#             return render(request, 'tesis.html', {'form': form})                 
+#             return render(request, 'tesis.html', {'form': form})
