@@ -17,12 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
-from tesis import urls
 
 urlpatterns = [
-    path('tesis/', include('tesis.urls')),
+    path('', include('tesis.urls')),
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
-    # path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('tesis/', TemplateView.as_view(template_name='tesis.html'), name='tesis')
-] + urls.urlpatterns
+]

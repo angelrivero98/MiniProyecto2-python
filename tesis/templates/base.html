@@ -50,22 +50,38 @@
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" href="{% url 'tesis' %}">
+              <a class="nav-link active" href="{% url 'home' %}">
                 <span data-feather="home"></span>
-                Gestión de Tesis <span class="sr-only">(current)</span>
+                Inicio <span class="sr-only">(current)</span>
               </a>
             </li>
+            {% if user.rol.id == 2 %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'tesis' %}">
+                <span data-feather="home"></span>
+                Gestión de Tesis
+              </a>
+            </li>
+            {% endif %}
+            {% if user.rol.id == 1 %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'users' %}">
                 <span data-feather="file"></span>
                 Gestión de Usuarios
               </a>
             </li>
+            {% endif %}
           </ul>
         </div>
       </nav>
       {% endif %}
-      {% block content %} {% endblock %}
+      {% if user.rol != None and user.rol.id != 3 %}
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        {% else %}
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
+          {% endif %}
+          {% block content %} {% endblock %}
+        </main>
     </div>
   </div>
 </body>

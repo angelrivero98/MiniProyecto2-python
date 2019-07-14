@@ -1,18 +1,12 @@
 {% extends 'base.html' %}
 {% block title %} Inicio {% endblock %}
 {% block content %}
-{% if user.rol != None and user.rol.id != 3 %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    {% else %}
-    <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
-        {% endif %}
-        <div class="text-center">
-            <h1>Buscar Tesis</h1>
-            <form action="/tesis" method="POST" class="text-center">
-                {% csrf_token %}
-                {{ form.search }}
-                <input type="submit" class="btn btn-primary" value="Buscar" />
-            </form>
-        </div>
-    </main>
-    {% endblock %}
+<div class="text-center">
+    <h1>Buscar Tesis</h1>
+    <form action="tesis/" method="POST" class="text-center">
+        {% csrf_token %}
+        {{ form.search }}
+        <input type="submit" class="btn btn-primary" value="Buscar" />
+    </form>
+</div>
+{% endblock %}
