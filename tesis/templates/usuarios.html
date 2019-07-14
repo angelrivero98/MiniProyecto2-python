@@ -14,20 +14,18 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form method="POST" action="users/">
-          {% csrf_token %}
+      <form method="POST" action="">
+        {% csrf_token %}
+        <div class="modal-body">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 {{ form.username }}
-                <!-- <input type="text" placeholder="Nombre" class="form-control" /> -->
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 {{ form.email }}
-                <!-- <input type="text" placeholder="Apellido" class="form-control" /> -->
               </div>
             </div>
           </div>
@@ -39,24 +37,25 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <select name="" id="" class="form-control">
-                  {% for rol in roles %}
-                  <option value="{{ rol.id }}">{{ rol.nombre }}</option>
-                  {% endfor %}
-                </select>
+                {{ form.rol }}
               </div>
             </div>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Cerrar
-        </button>
-        <button type="submit" class="btn btn-primary">
-          Crear usuario
-        </button>
-      </div>
+          <div class="row">
+            {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+            {{ field }} {{ error }}
+            {% endfor %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+          </button>
+          <input type="submit" class="btn btn-primary" value="Crear usuario" />
+        </div>
+      </form>
     </div>
   </div>
 </div>

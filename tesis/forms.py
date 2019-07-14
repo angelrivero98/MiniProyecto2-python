@@ -9,8 +9,10 @@ class UsuarioForm(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre de usuario'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo electrónico'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}), 
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
+            'rol': forms.Select(attrs={'class': 'form-control'})
         }
+
 
 class AutorForm(forms.ModelForm):
     class Meta:
@@ -21,10 +23,10 @@ class AutorForm(forms.ModelForm):
             'apellido': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'}),
         }
 
+
 class FormInicio(forms.Form):
     search = forms.CharField(
         max_length=255,
         widget=forms.TextInput(
             attrs={'class': 'form-control', 'placeholder': 'Buscar tesis'})
     )
-
