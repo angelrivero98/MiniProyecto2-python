@@ -11,10 +11,10 @@ def home(request):
         if form.is_valid():
             return render(request, 'home.html', {'form': form})
     else:
-        # form = FormInicio()
-        # return render(request, 'home.html', {'form': form})
-        filter = SearchFilter(request.GET, queryset=Tesis.objects.all())
-        return render(request, 'home.html', {'filter': filter})
+        form = FormInicio()
+        return render(request, 'home.html', {'form': form})
+        # filter = SearchFilter(request.GET, queryset=Tesis.objects.all())
+        # return render(request, 'home.html', {'filter': filter})
 
 
 def users(request):
