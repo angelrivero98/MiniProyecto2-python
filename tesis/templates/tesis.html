@@ -120,28 +120,17 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="">
+          <form action="POST" action="/autor">
+            {% csrf_token %}
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" placeholder="Nombre" class="form-control" />
+                  {{form.nombre}}
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="text" placeholder="Apellido" class="form-control" />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="email" placeholder="Email" class="form-control" />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="text" placeholder="Escuela" class="form-control" />
+                  {{form.apellido}}
                 </div>
               </div>
             </div>
@@ -160,67 +149,29 @@
     <table class="table table-striped table-sm">
       <thead>
         <tr>
-          <th>#</th>
           <th>Nombre</th>
           <th>Autores</th>
           <th>Evaluadores</th>
           <th>Fecha</th>
-          <th>Resumen</th>
           <th>Calificación</th>
-          <th>Estatus</th>
+          <th>Finalizada</th>
           <th>Escuela</th>
-          <th>Palabras claves</th>
+          <th>Tutor</th>
         </tr>
       </thead>
       <tbody>
+        {% for tesis in autores.tesis %}
         <tr>
-          <td>1</td>
-          <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
-          <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
-          <td>sit</td>
+          <td href="#">{{tesis.nombre}}</td>
+          <td>lorem</td>
+          <td>{{ tesis.evaluadores }}</td>
+          <td>{{ tesis.fecha }}</td>
+          <td>{{ tesis.calificacion }}</td>
+          <td>{{ tesis.finalizada }}</td>
+          <td>{{ tesis.escuela }}</td>
+          <td>{{ tesis.tutor }}</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
-          <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
-          <td>sit</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
-          <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
-          <td>sit</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
-          <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
-          <td>sit</td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
