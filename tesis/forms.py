@@ -9,7 +9,7 @@ class UsuarioForm(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre de usuario'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo electrónico'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña', 'required': False}),
             'rol': forms.Select(attrs={'class': 'form-control'})
         }
 

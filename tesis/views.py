@@ -8,30 +8,11 @@ import datetime
 # Create your views here.
 
 
-def home(request):
-    if request.method == 'POST':
-        form = FormInicio(request.POST)
-        if form.is_valid():
-            return render(request, 'home.html', {'form': form})
-    else:
-        form = FormInicio()
-        return render(request, 'home.html', {'form': form})
-
-
-class UsersView(View):
-
-    def get(self, request, *args, **kargs):
-        # usuario = kargs.get('id', None)
-        # if usuario == None:
-        usuarios = Usuario.objects.all()
+def create_user(request):
+    if request.method == "GET":
         form = UsuarioForm()
-        return render(request, "usuarios.html", {'usuarios': usuarios, 'form': form})
-        # else:
-        #     usuario = Usuario.objects.filter(pk=usuario)
-        #     form = UsuarioForm(usuario)
-        #     return HttpResponse
-
-    def post(self, request, *args, **kargs):
+        return render(request, "crear_usuario.html", {'form': form})
+    else:
         logging.info('Creando usuario')
         data = request.POST.copy()
         data['date_joined'] = datetime.datetime.now()
@@ -41,22 +22,53 @@ class UsersView(View):
                 logging.info('El usuario fue creado')
                 form.save()
                 usuarios = Usuario.objects.all()
-                form = UsuarioForm()
-                return render(request, "usuarios.html", {'usuarios': usuarios, 'form': form})
+                return render(request, "usuarios.html", {'usuarios': usuarios})
             except:
                 logging.error('Error guardando el usuario.')
                 pass
         else:
             logging.error(
                 'Error creando el usuario. El formulario no es válido' + str(request.POST))
-            return render(request, 'usuarios.html', {'form': form})
+            return render(request, 'crear_usuario.html', {'form': form})
 
-    def put(self, request, *args, **kargs):
-        form = UsuarioForm(request.PUT)
-        print(kargs['id'])
-        # if form.is_valid():
-        #     user = Usuario.objects.filter(pk=kargs['id'])
-        #     logging.info('El usuario se ha actualizado')
+
+def update_user(request, user_id):
+    users = Usuario.objects.filter(pk=user_id)
+    user = users[0]
+    if request.method == "GET":
+        form = UsuarioForm()
+        form.fields['username'].initial = user.username
+        form.fields['email'].initial = user.email
+        form.fields['rol'].initial = user.rol
+        return render(request, "crear_usuario.html", {'form': form})
+    else:
+        logging.info('Actualizando usuario')
+        data = request.POST.copy()
+        data['date_joined'] = datetime.datetime.now()
+        form = UsuarioForm(data)
+        if form.is_valid():
+            try:
+                user.username = form.cleaned_data['username']
+                if form.cleaned_data['password']:
+                    user.password = form.cleaned_data['password']
+                user.email = form.cleaned_data['email']
+                user.rol = form.cleaned_data['rol']
+                user.save()
+                logging.info('El usuario fue actualizado')
+                usuarios = Usuario.objects.all()
+                return render(request, "usuarios.html", {'usuarios': usuarios})
+            except:
+                logging.error('Error guardando el usuario.')
+                pass
+        else:
+            logging.error(
+                'Error creando el usuario. El formulario no es válido' + str(request.POST))
+            return render(request, 'crear_usuario.html', {'form': form})
+
+
+def get_users(request):
+    usuarios = Usuario.objects.all()
+    return render(request, "usuarios.html", {'usuarios': usuarios})
 
 
 def delete_user(request, user_id):
@@ -83,7 +95,7 @@ def tesis(request):
                 pass
         else:
             formAutor = AutorForm()
-            return render(request, 'tesis.html', {'formAutor': formAutor})    
+            return render(request, 'tesis.html', {'formAutor': formAutor})
 
 # def create_autor(request):
 #     if request.method == "POST":
