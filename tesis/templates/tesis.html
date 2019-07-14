@@ -121,27 +121,27 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="POST" action="/autor">
+        <form action="POST" action="tesis/">
           {% csrf_token %}
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                {{form.nombre}}
+                {{formAutor.nombre}}
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                {{form.apellido}}
+                {{formAutor.apellido}}
               </div>
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Cerrar
+            </button>
+            <button type="button" class="btn btn-primary">Crear autor</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Cerrar
-        </button>
-        <button type="button" class="btn btn-primary">Crear autor</button>
       </div>
     </div>
   </div>

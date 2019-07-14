@@ -41,16 +41,16 @@ def tesis(request):
         autores = Autor.objects.all()
         return render(request, "tesis.html", {'tesis': tesis, 'autores': autores})
     elif request.method == "POST":
-        form = AutorForm(request.POST)
-        if form.is_valid():
+        formAutor = AutorForm(request.POST)
+        if formAutor.is_valid():
             try:
-                form.save()
+                formAutor.save()
                 return redirect('/tesis')
             except:
                 pass
         else:
-            form = AutorForm()
-            return render(request, 'tesis.html', {'form': form})    
+            formAutor = AutorForm()
+            return render(request, 'tesis.html', {'formAutor': formAutor})    
 
 # def create_autor(request):
 #     if request.method == "POST":
