@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from tesis.models import Usuario, Tesis, Autor, Evaluador
+from tesis.models import Usuario, Tesis, Autor, Evaluador, Audit
 from tesis.forms import UsuarioForm, FormInicio, AutorForm
 from tesis.filters import SearchFilter
 import logging
@@ -22,6 +22,9 @@ def create_user(request):
                 logging.info('El usuario fue creado')
                 form.save()
                 usuarios = Usuario.objects.all()
+                if request.user.is_authenticated:
+                    audit = Audit(fecha=datetime.datetime.now(),userCreador=request.user, userCreado=form.instance)
+                    audit.save()
                 return render(request, "usuarios.html", {'usuarios': usuarios})
             except:
                 logging.error('Error guardando el usuario.')
