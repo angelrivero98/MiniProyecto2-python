@@ -1,7 +1,7 @@
 from django import forms
 from tesis.models import Usuario, Autor, Tesis
 
-
+#Los formularios asociados a la cracion de tesis, autor y usuario
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario

@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+#Urls asociados al crud de tesis y al de usuarios, donde le pasamos la funcion asociada a cada uno
 urlpatterns = [
     path('users/', views.get_users, name='users'),
     path('', views.TesisView.as_view(), name='tesis'),

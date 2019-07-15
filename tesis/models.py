@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
-
+#Modelos que seran transformados a tablas de base de datos
 class Rol(models.Model):
     nombre = models.CharField(max_length=255, blank=False, null=False)
 
