@@ -26,7 +26,7 @@
   </style>
   <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+  <title>{% block title %}Sistema de Tesis{% endblock %}</title>
 </head>
 
 <body>
@@ -68,6 +68,12 @@
               <a class="nav-link" href="{% url 'users' %}">
                 <span data-feather="file"></span>
                 Gestión de Usuarios
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'audit' %}">
+                <span data-feather="file"></span>
+                Auditoría
               </a>
             </li>
             {% endif %}

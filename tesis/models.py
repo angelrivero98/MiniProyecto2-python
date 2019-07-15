@@ -2,7 +2,9 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
-#Modelos que seran transformados a tablas de base de datos
+# Modelos que seran transformados a tablas de base de datos
+
+
 class Rol(models.Model):
     nombre = models.CharField(max_length=255, blank=False, null=False)
 
@@ -15,6 +17,8 @@ class Rol(models.Model):
 
 class Usuario(AbstractUser):
     rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
+    fecha_creacion = models.DateTimeField(default=timezone.now)
+    id_creador = models.IntegerField(null=True)
     REQUIRED_FIELDS = ['rol', 'email']
 
     class Meta:
@@ -81,21 +85,11 @@ class Tesis(models.Model):
     evaluadores = models.ManyToManyField(
         Evaluador, related_name='evaluadores')
     autores = models.ManyToManyField(Autor, related_name='autores')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    id_creador = models.IntegerField(null=False, blank=False)
 
     class Meta:
         db_table = 'tesis'
 
     def __str__(self):
         return self.nombre
-
-
-class Audit(models.Model):
-    fecha = models.DateTimeField('date created', auto_now_add=True)
-    userCreador = models.ForeignKey(
-        Usuario, on_delete=models.CASCADE, related_name='userCreador')
-    userCreado = models.ForeignKey(
-        Usuario, on_delete=models.CASCADE, related_name='userCreado', blank=True)
-    tesis = models.ForeignKey(Tesis, on_delete=models.CASCADE, blank=True)
-
-    class Meta:
-        db_table = 'audit'

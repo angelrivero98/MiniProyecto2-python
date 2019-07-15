@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from tesis.models import Usuario, Tesis, Autor, Evaluador, Audit
+from tesis.models import Usuario, Tesis, Autor, Evaluador
 from tesis.forms import UsuarioForm, AutorForm, TesisForm
 import logging
 import datetime
@@ -17,6 +17,8 @@ def create_user(request):
         logging.info('Creando usuario')
         data = request.POST.copy()
         data['date_joined'] = datetime.datetime.now()
+        data['fecha_creacion'] = datetime.datetime.now()
+        data['id_creador'] = request.user.id
         form = UsuarioForm(data)
         if form.is_valid():
             try:
@@ -38,7 +40,9 @@ def create_user(request):
                 'Error creando el usuario. El formulario no es válido' + str(request.POST))
             return render(request, 'crear_usuario.html', {'form': form})
 
-#Funcion para editar el usuario dependiendo del id
+# Funcion para editar el usuario dependiendo del id
+
+
 def update_user(request, user_id):
     users = Usuario.objects.filter(pk=user_id)
     user = users[0]
@@ -71,12 +75,16 @@ def update_user(request, user_id):
                 'Error creando el usuario. El formulario no es válido' + str(request.POST))
             return render(request, 'crear_usuario.html', {'form': form})
 
-#Funcion que permite obtener el listado de los usuarios de la base de datos
+# Funcion que permite obtener el listado de los usuarios de la base de datos
+
+
 def get_users(request):
     usuarios = Usuario.objects.all()
     return render(request, "usuarios.html", {'usuarios': usuarios})
 
-#Funcion que permite eliminar el usuario segun el id
+# Funcion que permite eliminar el usuario segun el id
+
+
 def delete_user(request, user_id):
     logging.info('Eliminando al usuario')
     user = Usuario.objects.filter(pk=user_id)
@@ -94,7 +102,10 @@ def create_tesis(request):
         return render(request, 'crear_tesis.html', {'form': form})
     else:
         logging.info('Creando tesis')
-        form = TesisForm(request.POST)
+        data = request.POST.copy()
+        data['id_creador'] = request.user.id
+        data['fecha_creacion'] = datetime.datetime.now()
+        form = TesisForm(data)
         if form.is_valid():
             try:
                 logging.info('La tesis fue creada')
@@ -110,7 +121,9 @@ def create_tesis(request):
                 'Error creando la tesis. El formulario no es válido' + str(request.POST))
             return render(request, 'crear_tesis.html', {'form': form})
 
-#Vista donde se muesta la lista de tesis, donde definimos sus metodos para el get y el post
+# Vista donde se muesta la lista de tesis, donde definimos sus metodos para el get y el post
+
+
 class TesisView(View):
 
     def get(self, request, *args, **kargs):
@@ -121,7 +134,9 @@ class TesisView(View):
         tesis = Tesis.objects.all()
         return render(request, "tesis.html", {'tesis': tesis})
 
-#Funcion que permite crear un autor segun el formulario indicasdo
+# Funcion que permite crear un autor segun el formulario indicasdo
+
+
 def postAutor(request):
     if request.method == "POST":
         formAutor = AutorForm(request.POST)
@@ -134,3 +149,9 @@ def postAutor(request):
                 pass
     formAutor = AutorForm()
     return render(request, 'createAutor.html', {'formAutor': formAutor})
+
+
+def audit(request):
+    usuarios = Usuario.objects.all()
+    tesis = Tesis.objects.all()
+    return render(request, 'audit.html', {'usuarios': usuarios, 'tesis': tesis})
