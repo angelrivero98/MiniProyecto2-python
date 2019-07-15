@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Crear tesis</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Nombre</label>
+                            {{ form.nombre }}
+                            <!-- <input type="text" placeholder="Nombre" class="form-control" /> -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Evaluadores</label>
+                            {{ form.evaluadores }}
+                            <!-- <input type="text" placeholder="Evaluadores" class="form-control" /> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Fecha</label>
+                            {{ form.fecha }}
+                            <!-- <input type="date" placeholder="Fecha" class="form-control" /> -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Calificación</label>
+                            {{ form.calificacion }}
+                            <!-- <input type="text" placeholder="Calificación" class="form-control" /> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Estatus</label>
+                            {{ form.finalizada }}
+                            <!-- <input type="text" placeholder="Estatus" class="form-control" /> -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Escuela</label>
+                            {{ form.escuela }}
+                            <!-- <input type="text" placeholder="Escuela" class="form-control" /> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">Palabras claves</label>
+                            {{ form.palabrasclave }}
+                            <!-- <input type="text" placeholder="Palabras claves" class="form-control" />
+                            <small>Por favor, separe con una "," cada palabra clave</small> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Resumen">Resumen</label>
+                            <!-- <textarea name="" id="" cols="30" rows="2" class="form-control"></textarea> -->
+                            {{ form.resumen }}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Cerrar
+            </button>
+            <button type="button" class="btn btn-primary">Crear tesis</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
