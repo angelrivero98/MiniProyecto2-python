@@ -17,27 +17,25 @@ class UsuarioForm(forms.ModelForm):
 class AutorForm(forms.ModelForm):
     class Meta:
         model = Autor
-        fields = ('nombre','apellido',)
+        fields = ('nombre', 'apellido',)
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
             'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'}),
         }
 
 
-class FormInicio(forms.Form):
-    search = forms.CharField(
-        max_length=255,
-        widget=forms.TextInput(
-            attrs={'class': 'form-control', 'placeholder': 'Buscar tesis'})
-    )
-
 class TesisForm(forms.Form):
     class Meta:
         model = Tesis
         fields = '__all__'
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo electrónico'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
-            'rol': forms.Select(attrs={'class': 'form-control'})
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
+            'resumen': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Resumen'}),
+            'fecha': forms.DateTimeInput(attrs={'class': 'form-control datetimepicker-input', 'data-target': '#datetimepicker1', 'placeholder': 'Fecha'}),
+            'calificacion': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
+            'finalizada': forms.CheckboxInput(attrs={'class': 'form-control'}),
+            'escuela': forms.Select(attrs={'class': 'form-control'}),
+            'palabrasclave': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'evaluadores': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'tutor': forms.Select(attrs={'class': 'form-control'})
         }
