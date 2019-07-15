@@ -28,9 +28,9 @@
     <tbody>
       {% for t in tesis %}
       <tr>
-        <td href="#">{{t.nombre}}</td>
-        <td>{{ t.palabrasclave|join:" // " }}</td>
-        <td>{{ t.evaluadores|join:" // " }}</td>
+        <a href="#"><td>{{t.nombre}}</td></a>
+        <td>{{ t.palabrasclave.all|join:", " }}</td>
+        <td>{{ t.evaluadores.all|join:", " }}</td>
         <td>{{ t.fecha }}</td>
         <td>{{ t.calificacion }}</td>
         <td>{{ t.finalizada }}</td>
