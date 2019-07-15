@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from tesis.models import Usuario, Tesis, Autor, Evaluador, Audit
-from tesis.forms import UsuarioForm, FormInicio, AutorForm
-from tesis.filters import SearchFilter
+from tesis.forms import UsuarioForm, AutorForm, TesisForm
 import logging
 import datetime
 import threading
@@ -21,7 +20,13 @@ def create_user(request):
         if form.is_valid():
             try:
                 logging.info('El usuario fue creado')
-                form.save() 
+                user = form.save()
+                password = form.cleaned_data['password']
+                user.set_password(password)
+                user.is_staff = True
+                user.is_active = True
+                user.is_superuser = True
+                user.save()
                 usuarios = Usuario.objects.all()
                 return render(request, "usuarios.html", {'usuarios': usuarios})
             except:
@@ -49,18 +54,17 @@ def update_user(request, user_id):
         form = UsuarioForm(data)
         if form.is_valid():
             try:
-                user.username = form.cleaned_data['username']
+                user.update(username=form.cleaned_data['username'])
                 if form.cleaned_data['password']:
-                    user.password = form.cleaned_data['password']
-                user.email = form.cleaned_data['email']
-                user.rol = form.cleaned_data['rol']
-                user.save()
+                    user.set_password(form.cleaned_data['password'])
+                user.update(email=form.cleaned_data['email'])
+                user.update(rol=form.cleaned_data['rol'])
                 logging.info('El usuario fue actualizado')
                 usuarios = Usuario.objects.all()
                 return render(request, "usuarios.html", {'usuarios': usuarios})
             except:
                 logging.error('Error guardando el usuario.')
-                pass
+                return render(request, 'crear_usuario.html', {'form': form})
         else:
             logging.error(
                 'Error creando el usuario. El formulario no es válido' + str(request.POST))
@@ -76,12 +80,20 @@ def delete_user(request, user_id):
     logging.info('Eliminando al usuario')
     user = Usuario.objects.filter(pk=user_id)
     user.delete()
-    usuarios = Usuario.objects.all()
-    form = UsuarioForm()
     return redirect('users')
 
+
+def create_tesis(request):
+    if request.method == 'GET':
+        form = TesisForm()
+        return render(request, 'crear_tesis.html', {'form': form})
+    else:
+        form = TesisForm()
+        return render(request, 'crear_tesis.html', {'form': form})
+
+
 class TesisView(View):
-    
+
     def get(self, request, *args, **kargs):
         tesis = Tesis.objects.all()
         autores = Autor.objects.all()
@@ -90,7 +102,8 @@ class TesisView(View):
     def post(self, request, *args, **kargs):
         tesis = Tesis.objects.all()
         autores = Autor.objects.all()
-        return render(request, "tesis.html", {'tesis': tesis, 'autores': autores})     
+        return render(request, "tesis.html", {'tesis': tesis, 'autores': autores})
+
 
 def postAutor(request):
     if request.method == "POST":
@@ -102,6 +115,4 @@ def postAutor(request):
             except:
                 pass
     formAutor = AutorForm()
-    return render(request, 'createAutor.html', {'formAutor': formAutor})        
-
-
+    return render(request, 'createAutor.html', {'formAutor': formAutor})
