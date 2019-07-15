@@ -7,7 +7,7 @@ import datetime
 import threading
 # Create your views here.
 
-
+#Esta funcion es para la creacion de usuarios donde se valida el formulario de usuario
 def create_user(request):
     if request.method == "GET":
         form = UsuarioForm()
@@ -82,7 +82,7 @@ def delete_user(request, user_id):
     user.delete()
     return redirect('users')
 
-
+#Esta funcion es para la creacion de tesis donde se valida el formulario de tesis
 def create_tesis(request):
     if request.method == 'GET':
         form = TesisForm()

@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('users/', views.get_users, name='users'),
-    path('tesis/', views.TesisView.as_view(), name='tesis'),
+    path('', views.TesisView.as_view(), name='tesis'),
     path('tesis/create', views.create_tesis, name='create_tesis'),
     path('postAutor/', views.postAutor, name='postAutor'),
     path('users/', views.get_users, name='users'),
