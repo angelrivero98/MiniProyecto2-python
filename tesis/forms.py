@@ -17,10 +17,11 @@ class UsuarioForm(forms.ModelForm):
 class AutorForm(forms.ModelForm):
     class Meta:
         model = Autor
-        fields = ('nombre', 'apellido',)
+        fields = '__all__'
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
             'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'}),
+            'tesis': forms.Selectattrs = {'class': 'form-control'}),
         }
 
 
