@@ -5,6 +5,7 @@ from tesis.forms import UsuarioForm, FormInicio, AutorForm
 from tesis.filters import SearchFilter
 import logging
 import datetime
+import threading
 # Create your views here.
 
 
@@ -20,11 +21,8 @@ def create_user(request):
         if form.is_valid():
             try:
                 logging.info('El usuario fue creado')
-                form.save()
+                form.save() 
                 usuarios = Usuario.objects.all()
-                if request.user.is_authenticated:
-                    audit = Audit(fecha=datetime.datetime.now(),userCreador=request.user, userCreado=form.instance)
-                    audit.save()
                 return render(request, "usuarios.html", {'usuarios': usuarios})
             except:
                 logging.error('Error guardando el usuario.')
