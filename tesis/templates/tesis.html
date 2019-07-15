@@ -17,26 +17,24 @@
     <thead>
       <tr>
         <th>Nombre</th>
-        <th>Autores</th>
+        <th>Palabras clave</th>
         <th>Evaluadores</th>
         <th>Fecha</th>
         <th>Calificación</th>
         <th>Finalizada</th>
         <th>Escuela</th>
-        <th>Tutor</th>
       </tr>
     </thead>
     <tbody>
-      {% for tesis in autores.tesis %}
+      {% for t in tesis %}
       <tr>
-        <td href="#">{{tesis.nombre}}</td>
-        <td>lorem</td>
-        <td>{{ tesis.evaluadores }}</td>
-        <td>{{ tesis.fecha }}</td>
-        <td>{{ tesis.calificacion }}</td>
-        <td>{{ tesis.finalizada }}</td>
-        <td>{{ tesis.escuela }}</td>
-        <td>{{ tesis.tutor }}</td>
+        <td href="#">{{t.nombre}}</td>
+        <td>{{ t.palabrasclave|join:" // " }}</td>
+        <td>{{ t.evaluadores|join:" // " }}</td>
+        <td>{{ t.fecha }}</td>
+        <td>{{ t.calificacion }}</td>
+        <td>{{ t.finalizada }}</td>
+        <td>{{ t.escuela }}</td>
       </tr>
       {% endfor %}
     </tbody>

@@ -98,6 +98,34 @@
         }
     },
     {
+        "model": "tesis.palabraclave",
+        "pk": 1,
+        "fields": {
+            "nombre": "IA"
+        }
+    },
+    {
+        "model": "tesis.palabraclave",
+        "pk": 2,
+        "fields": {
+            "nombre": "Redes"
+        }
+    },
+    {
+        "model": "tesis.palabraclave",
+        "pk": 3,
+        "fields": {
+            "nombre": "Machine Learning"
+        }
+    },
+    {
+        "model": "tesis.palabraclave",
+        "pk": 4,
+        "fields": {
+            "nombre": "Base de datos"
+        }
+    },
+    {
         "model": "admin.logentry",
         "pk": 1,
         "fields": {

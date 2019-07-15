@@ -112,13 +112,11 @@ class TesisView(View):
 
     def get(self, request, *args, **kargs):
         tesis = Tesis.objects.all()
-        autores = Autor.objects.all()
-        return render(request, "tesis.html", {'tesis': tesis, 'autores': autores})
+        return render(request, "tesis.html", {'tesis': tesis})
 
     def post(self, request, *args, **kargs):
         tesis = Tesis.objects.all()
-        autores = Autor.objects.all()
-        return render(request, "tesis.html", {'tesis': tesis, 'autores': autores})
+        return render(request, "tesis.html", {'tesis': tesis})
 
 
 def postAutor(request):
