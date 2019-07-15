@@ -14,13 +14,6 @@
         }
     },
     {
-        "model": "tesis.rol",
-        "pk": 3,
-        "fields": {
-            "nombre": "Usuario"
-        }
-    },
-    {
         "model": "tesis.usuario",
         "pk": 1,
         "fields": {
