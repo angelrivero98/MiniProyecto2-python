@@ -21,7 +21,7 @@ class AutorForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
             'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'}),
-            'tesis': forms.Selectattrs = {'class': 'form-control'}),
+            'tesis': forms.Select(attrs={'class': 'form-control'}),
         }
 
 

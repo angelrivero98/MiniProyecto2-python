@@ -20,7 +20,6 @@
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.rol }}</td>
         <td>
-          <a href="{% url 'users' %}{{ usuario.id }}/update" class="btn btn-info">Editar</a>
           <form action="{% url 'users' %}{{ usuario.id }}/delete" method="POST">
             {% csrf_token %}
             <input type="submit" value="Eliminar" class="btn btn-danger" />
