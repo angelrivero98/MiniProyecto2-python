@@ -24,15 +24,15 @@ class AutorForm(forms.ModelForm):
         }
 
 
-class TesisForm(forms.Form):
+class TesisForm(forms.ModelForm):
     class Meta:
         model = Tesis
         fields = '__all__'
         widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
-            'resumen': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Resumen'}),
-            'fecha': forms.DateTimeInput(attrs={'class': 'form-control datetimepicker-input', 'data-target': '#datetimepicker1', 'placeholder': 'Fecha'}),
-            'calificacion': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'resumen': forms.Textarea(attrs={'class': 'form-control'}),
+            'fecha': forms.DateInput(attrs={'class': 'form-control datetimepicker-input', 'data-target': '#datetimepicker1', 'placeholder': 'Fecha', 'type': 'date'}),
+            'calificacion': forms.NumberInput(attrs={'class': 'form-control'}),
             'finalizada': forms.CheckboxInput(attrs={'class': 'form-control'}),
             'escuela': forms.Select(attrs={'class': 'form-control'}),
             'palabrasclave': forms.SelectMultiple(attrs={'class': 'form-control'}),

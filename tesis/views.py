@@ -27,10 +27,6 @@ def create_user(request):
                 user.is_superuser = True
                 user.save()
                 usuarios = Usuario.objects.all()
-                if request.user.is_authenticated:
-                    audit = Audit(fecha=datetime.datetime.now(
-                    ), userCreador=request.user, userCreado=form.instance)
-                    audit.save()
                 return render(request, "usuarios.html", {'usuarios': usuarios})
             except:
                 logging.error('Error guardando el usuario.')
@@ -89,10 +85,26 @@ def delete_user(request, user_id):
 def create_tesis(request):
     if request.method == 'GET':
         form = TesisForm()
+        print('Obtener formulario')
+        logging.info(form)
         return render(request, 'crear_tesis.html', {'form': form})
     else:
-        form = TesisForm()
-        return render(request, 'crear_tesis.html', {'form': form})
+        logging.info('Creando tesis')
+        form = TesisForm(request.POST)
+        if form.is_valid():
+            try:
+                logging.info('La tesis fue creada')
+                form.save()
+                tesis = Tesis.objects.all()
+                return render(request, "tesis.html", {'tesis': tesis})
+            except Exception as e:
+                print(e)
+                logging.error('Error guardando la tesis.')
+                return render(request, 'crear_tesis.html', {'form': form})
+        else:
+            logging.error(
+                'Error creando la tesis. El formulario no es válido' + str(request.POST))
+            return render(request, 'crear_tesis.html', {'form': form})
 
 
 class TesisView(View):

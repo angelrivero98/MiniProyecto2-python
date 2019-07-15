@@ -75,8 +75,6 @@ class Tesis(models.Model):
         PalabraClave)
     evaluadores = models.ManyToManyField(
         Evaluador, related_name='evaluadores')
-    tutor = models.ForeignKey(
-        Evaluador, on_delete=models.CASCADE, related_name='tutor')
 
     class Meta:
         db_table = 'tesis'
