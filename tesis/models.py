@@ -97,8 +97,8 @@ class Audit(models.Model):
     userCreador = models.ForeignKey(
         Usuario, on_delete=models.CASCADE, related_name='userCreador')
     userCreado = models.ForeignKey(
-        Usuario, on_delete=models.CASCADE, related_name='userCreado')
-    tesis = models.ForeignKey(Tesis, on_delete=models.CASCADE)
+        Usuario, on_delete=models.CASCADE, related_name='userCreado', blank=True)
+    tesis = models.ForeignKey(Tesis, on_delete=models.CASCADE, blank=True)
 
     class Meta:
         db_table = 'audit'
