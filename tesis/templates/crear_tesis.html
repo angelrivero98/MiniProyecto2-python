@@ -15,15 +15,31 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Nombre</label>
-              {{ form.nombre }}
+              {{ form.nombre }}`
               <!-- <input type="text" placeholder="Nombre" class="form-control" /> -->
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
+              <label for="">Autores</label>
+              {{ form.autores }}
+              <!-- <input type="text" placeholder="Evaluadores" class="form-control" /> -->
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
               <label for="">Evaluadores</label>
               {{ form.evaluadores }}
-              <!-- <input type="text" placeholder="Evaluadores" class="form-control" /> -->
+              <!-- <input type="date" placeholder="Fecha" class="form-control" /> -->
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Escuela</label>
+              {{ form.escuela }}
+              <!-- <input type="text" placeholder="Calificación" class="form-control" /> -->
             </div>
           </div>
         </div>
@@ -32,40 +48,32 @@
             <div class="form-group">
               <label for="">Fecha</label>
               {{ form.fecha }}
-              <!-- <input type="date" placeholder="Fecha" class="form-control" /> -->
+              <!-- <input type="text" placeholder="Estatus" class="form-control" /> -->
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Calificación</label>
               {{ form.calificacion }}
-              <!-- <input type="text" placeholder="Calificación" class="form-control" /> -->
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="">Estatus</label>
-              {{ form.finalizada }}
-              <!-- <input type="text" placeholder="Estatus" class="form-control" /> -->
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="">Escuela</label>
-              {{ form.escuela }}
               <!-- <input type="text" placeholder="Escuela" class="form-control" /> -->
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="">Palabras claves</label>
               {{ form.palabrasclave }}
               <!-- <input type="text" placeholder="Palabras claves" class="form-control" />
                             <small>Por favor, separe con una "," cada palabra clave</small> -->
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Finalizada</label>
+              {{ form.finalizada }}
+              <!-- <input type="text" placeholder="Palabras claves" class="form-control" />
+                              <small>Por favor, separe con una "," cada palabra clave</small> -->
             </div>
           </div>
         </div>

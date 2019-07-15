@@ -5,7 +5,7 @@
 <a href="{% url 'create_tesis' %}" class="btn btn-primary float-right my-3">
   Crear tesis
 </a>
-<a href="{% url 'postAutor' %}">
+<a href="{% url 'autor' %}">
   <button class="btn btn-primary float-right my-3  mr-3" type="button">
     Crear autor
   </button>
@@ -17,10 +17,11 @@
     <thead>
       <tr>
         <th>Nombre</th>
-        <th>Palabras clave</th>
+        <th>Autores</th>
         <th>Evaluadores</th>
         <th>Fecha</th>
         <th>Calificación</th>
+        <th>Palabras clave</th>
         <th>Finalizada</th>
         <th>Escuela</th>
       </tr>
@@ -28,11 +29,12 @@
     <tbody>
       {% for t in tesis %}
       <tr>
-        <a href="#"><td>{{t.nombre}}</td></a>
-        <td>{{ t.palabrasclave.all|join:", " }}</td>
+        <td>{{t.nombre}}</td>
+        <td>{{ t.autores.all|join:", " }}</td>
         <td>{{ t.evaluadores.all|join:", " }}</td>
         <td>{{ t.fecha }}</td>
         <td>{{ t.calificacion }}</td>
+        <td>{{ t.palabrasclave.all|join:", " }}</td>
         <td>{{ t.finalizada }}</td>
         <td>{{ t.escuela }}</td>
       </tr>

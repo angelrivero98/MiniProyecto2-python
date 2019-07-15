@@ -63,6 +63,11 @@ class Evaluador(Persona):
         db_table = 'evaluador'
 
 
+class Autor(Persona):
+    class Meta:
+        db_table = 'autor'
+
+
 class Tesis(models.Model):
     nombre = models.CharField(max_length=255, null=False, blank=False)
     fecha = models.DateField(default=timezone.now, null=False, blank=False)
@@ -75,19 +80,13 @@ class Tesis(models.Model):
         PalabraClave)
     evaluadores = models.ManyToManyField(
         Evaluador, related_name='evaluadores')
+    autores = models.ManyToManyField(Autor, related_name='autores')
 
     class Meta:
         db_table = 'tesis'
 
     def __str__(self):
         return self.nombre
-
-
-class Autor(Persona):
-    tesis = models.ForeignKey(Tesis, on_delete=models.CASCADE, blank=True)
-
-    class Meta:
-        db_table = 'autor'
 
 
 class Audit(models.Model):

@@ -21,7 +21,6 @@ class AutorForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
             'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'}),
-            'tesis': forms.Select(attrs={'class': 'form-control'}),
         }
 
 
@@ -38,5 +37,5 @@ class TesisForm(forms.ModelForm):
             'escuela': forms.Select(attrs={'class': 'form-control'}),
             'palabrasclave': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'evaluadores': forms.SelectMultiple(attrs={'class': 'form-control'}),
-            'tutor': forms.Select(attrs={'class': 'form-control'})
+            'autores': forms.SelectMultiple(attrs={'class': 'form-control'})
         }

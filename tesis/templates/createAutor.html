@@ -2,39 +2,35 @@
 {% block title %} Dashboard {% endblock %}
 {% block content %}
 <div class="container-fluid" id="exampleAutor" tabindex="-1" role="dialog" aria-labelledby="exampleAutorLabel"
-aria-hidden="true">
-    <div class="modal-header">
-      <h5 class="modal-title">Crear autor</h5>
-    </div>
+  aria-hidden="true">
+  <div class="modal-header">
+    <h5 class="modal-title">Crear autor</h5>
+  </div>
+
+  <form method="POST" action="{% url 'autor' %}">
+    {% csrf_token %}
     <div class="modal-body">
-      <form action="POST">
-        {% csrf_token %}
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              {{formAutor.nombre}}
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              {{formAutor.apellido}}
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-md-6">
+          {{formAutor.nombre}}
         </div>
-        <div class="row">
-          {% for field, errors in formAutor.errors.items %}
-          {% for error in errors %}
-          {{ field }} {{ error }}
-          {% endfor %}
-          {% endfor %}
+        <div class="col-md-6">
+          {{formAutor.apellido}}
         </div>
-        <div class="modal-footer">
-          <a href="{% url 'tesis' %}"><button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Cerrar
-          </button></a>
-          <button type="button" class="btn btn-primary">Crear autor</button>
-        </div>
-      </form>
+      </div>
+      <div class="row">
+        {% for field, errors in formAutor.errors.items %}
+        {% for error in errors %}
+        {{ field }} {{ error }}
+        {% endfor %}
+        {% endfor %}
+      </div>
     </div>
+    <div class="modal-footer">
+      <a href="{% url 'tesis' %}" class="btn btn-secondary">Cerrar</a>
+      <input type="submit" class="btn btn-primary" value="Crear autor" />
+    </div>
+  </form>
+
 </div>
 {% endblock %}
