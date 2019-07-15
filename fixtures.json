@@ -68,6 +68,36 @@
         }
     },
     {
+        "model": "tesis.evaluador",
+        "pk": 1,
+        "fields": {
+            "nombre": "Angel",
+            "apellido": "Rivero",
+            "cedula": "4235252",
+            "es_tutor": "False"
+        }
+    },
+    {
+        "model": "tesis.evaluador",
+        "pk": 2,
+        "fields": {
+            "nombre": "Cagua",
+            "apellido": "Perez",
+            "cedula": "11976058",
+            "es_tutor": "False"
+        }
+    },
+    {
+        "model": "tesis.evaluador",
+        "pk": 3,
+        "fields": {
+            "nombre": "Fernando",
+            "apellido": "Vargas",
+            "cedula": "26350800",
+            "es_tutor": "False"
+        }
+    },
+    {
         "model": "admin.logentry",
         "pk": 1,
         "fields": {
